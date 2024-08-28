@@ -39,7 +39,7 @@ You can also use the library programmatically by importing the necessary functio
 
 ```python
 from pathlib import Path
-from llm_components.loaders import map_codebase_to_text
+from llm_components.loaders.code_base import map_codebase_to_text
 
 root_dir = Path("/path/to/your/code/base")
 result = map_codebase_to_text(root_dir)
