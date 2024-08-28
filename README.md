@@ -43,6 +43,7 @@ This will output the directory structure and file contents in a structured markd
 You can also use the library programmatically by importing the necessary functions.
 
 ```python
+import tempfile
 from pathlib import Path
 from llm_components.loaders.code_base import map_codebase_to_text
 from llm_components.loaders.git_utils import clone_repository
