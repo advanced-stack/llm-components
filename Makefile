@@ -10,7 +10,7 @@ test:
 
 setup: venv
 	@bin/pip3 install -U pip
-	@bin/pip3 install jupyter ipython
+	@bin/pip3 install jupyter build twine
 	@bin/pip3 install -e .
 
 # Define the package name and version
@@ -31,7 +31,7 @@ GIT_REPO_URL := https://github.com/advanced-stack/$(PKG_NAME).git
 # Define the command to run Python
 PYTHON := python3
 
-PKG_VERSION := 1.0.0
+PKG_VERSION := 1.1.0
 
 # Define the command to run pip
 PIP := pip3

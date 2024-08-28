@@ -17,7 +17,8 @@ def traverse_directory(root_dir, gitignore_file):
         spec = pathspec.GitIgnoreSpec.from_lines(f)
 
     def traverse(path, depth):
-        if spec.match_file(path):
+        relative_path = path.relative_to(root_dir)
+        if spec.match_file(str(relative_path)):
             return []
         if path.is_dir():
             children = [traverse(child, depth + 1) for child in path.iterdir()]
@@ -77,11 +78,15 @@ def format_output(traversed_data, root_dir, gitignore_file):
         if item.is_dir():
             result.append(f"{'#' * depth} {item.name}\n")
             result.append(f"./{relative_path}:\n```\n")
+
             dir_contents = [
-                child
-                for child in map(format_dir_name, item.iterdir())
-                if not spec.match_file(child)
+                child.name
+                for child in item.iterdir()
+                if not spec.match_file(
+                    format_dir_name(child.relative_to(root_dir))
+                )
             ]
+
             result.append("\n".join(dir_contents))
             result.append("\n```\n\n")
         else:

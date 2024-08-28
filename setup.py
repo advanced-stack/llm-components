@@ -9,7 +9,7 @@ requirements = (here / "requirements.txt").read_text().splitlines()
 
 setup(
     name="llm-components",
-    version="1.0.0",
+    version="1.1.0",
     license="MIT",
     description="A library of ready-to-use LLM components",
     long_description=long_description,

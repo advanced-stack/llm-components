@@ -11,6 +11,7 @@ The first data source implemented is a code base (a folder containing a gitignor
 - Traverse a directory tree while respecting `.gitignore` rules.
 - Format the directory structure and file contents into a readable markdown format.
 - Command-line interface for easy usage.
+- Clone a git repository and format its contents.
 
 ## Installation
 To install the `llm-components` library, you can use pip:
@@ -21,15 +22,19 @@ pip install llm-components
 ## Usage
 
 ### Command-Line Interface
-You can use the command-line interface to map a code base to markdown. The CLI takes the root directory of the code base as an argument.
+You can use the command-line interface to map a code base to markdown. The CLI takes the root directory of the code base or a git repository URL as an argument.
 
 ```sh
-format-codebase <root_dir>
+format-codebase <root_dir_or_repo>
 ```
 
 ### Example
 ```sh
+# For a local directory
 format-codebase /path/to/your/code/base
+
+# For a git repository
+format-codebase https://github.com/your/repo.git
 ```
 
 This will output the directory structure and file contents in a structured markdown format.
@@ -40,10 +45,20 @@ You can also use the library programmatically by importing the necessary functio
 ```python
 from pathlib import Path
 from llm_components.loaders.code_base import map_codebase_to_text
+from llm_components.loaders.git_utils import clone_repository
 
+# For a local directory
 root_dir = Path("/path/to/your/code/base")
 result = map_codebase_to_text(root_dir)
 print(result)
+
+# For a git repository
+repo_url = "https://github.com/your/repo.git"
+with tempfile.TemporaryDirectory() as temp_dir:
+    clone_dir = Path(temp_dir) / "repo"
+    clone_repository(repo_url, clone_dir)
+    result = map_codebase_to_text(clone_dir)
+    print(result)
 ```
 
 ## License
