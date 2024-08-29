@@ -22,6 +22,7 @@ pip install llm-components
 ## Usage
 
 ### Command-Line Interface
+
 You can use the command-line interface to map a code base to markdown. The CLI takes the root directory of the code base or a git repository URL as an argument.
 
 ```sh
@@ -29,6 +30,7 @@ format-codebase <root_dir_or_repo>
 ```
 
 ### Example
+
 ```sh
 # For a local directory
 format-codebase /path/to/your/code/base
@@ -40,6 +42,7 @@ format-codebase https://github.com/your/repo.git
 This will output the directory structure and file contents in a structured markdown format.
 
 ### Programmatic Usage
+
 You can also use the library programmatically by importing the necessary functions.
 
 ```python
@@ -63,4 +66,5 @@ with tempfile.TemporaryDirectory() as temp_dir:
 ```
 
 ## License
+
 This project is licensed under the MIT License.
