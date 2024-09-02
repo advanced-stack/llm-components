@@ -1,5 +1,6 @@
 import pathspec
 from pathlib import Path
+import mimetypes
 
 
 def traverse_directory(root_dir, gitignore_file):
@@ -70,7 +71,11 @@ def format_output(traversed_data, root_dir, gitignore_file):
         return file_path.stat().st_size
 
     def read_file(file_path):
-        return file_path.read_text()
+        mime_type, _ = mimetypes.guess_type(file_path)
+        if mime_type and mime_type.startswith("text"):
+            return file_path.read_text()
+        else:
+            return "[Non-text file content not displayed]"
 
     result = []
     for item, depth in traversed_data:
