@@ -7,9 +7,14 @@ main_package = packages[0]
 long_description = (here / "README.md").read_text()
 requirements = (here / "requirements.txt").read_text().splitlines()
 
+# Import the version from the version module
+version = {}
+with open(here / "src" / "llm_components" / "version.py") as f:
+    exec(f.read(), version)
+
 setup(
     name="llm-components",
-    version="1.1.0",
+    version=version["__version__"],
     license="MIT",
     description="A library of ready-to-use LLM components",
     long_description=long_description,
@@ -23,7 +28,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "format-codebase=llm_components.cli:main",
+            "llm-components=llm_components.cli:main",
         ],
     },
 )
