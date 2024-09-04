@@ -31,7 +31,7 @@ GIT_REPO_URL := https://github.com/advanced-stack/$(PKG_NAME).git
 # Define the command to run Python
 PYTHON := python3
 
-PKG_VERSION := 1.3.1
+PKG_VERSION := 1.3.2
 
 # Define the command to run pip
 PIP := pip3

@@ -18,7 +18,7 @@ def traverse_directory(root_dir, gitignore_file):
 
     def traverse(path, depth):
         relative_path = path.relative_to(root_dir)
-        if spec.match_file(str(relative_path)):
+        if spec.match_file(str(relative_path)) or path.name == ".git":
             return []
         if path.is_dir():
             children = [traverse(child, depth + 1) for child in path.iterdir()]
