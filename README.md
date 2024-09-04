@@ -2,16 +2,18 @@
 
 ## Overview
 
-`llm-components` is a Python library designed to feed large language models with data from different sources. The library formats content in a structured markdown format.
+`llm-components` is a Python library designed to feed large language models with data from different sources.
 
-The first data source implemented is a code base (a folder containing a gitignore file).
+The library formats content in a structured markdown format.
 
 ## Features
 
-- Traverse a directory tree while respecting `.gitignore` rules.
-- Format the directory structure and file contents into a readable markdown format.
-- Command-line interface for easy usage.
-- Clone a git repository and format its contents.
+- Code base formatting:
+    - Traverse a directory tree while respecting `.gitignore` rules.
+    - Format the directory structure and file contents into a readable markdown format.
+    - Clone a git repository and format its contents.
+
+- Convert web pages to markdown format
 
 ## Installation
 To install the `llm-components` library, you can use pip:
@@ -26,17 +28,26 @@ pip install llm-components
 You can use the command-line interface to map a code base to markdown. The CLI takes the root directory of the code base or a git repository URL as an argument.
 
 ```sh
-format-codebase <root_dir_or_repo>
+llm-components format-codebase <root_dir_or_repo>
+```
+
+You can also convert a web page to markdown using the CLI:
+
+```sh
+llm-components web-to-markdown <url>
 ```
 
 ### Example
 
 ```sh
 # For a local directory
-format-codebase /path/to/your/code/base
+llm-components format-codebase /path/to/your/code/base
 
 # For a git repository
-format-codebase https://github.com/your/repo.git
+llm-components format-codebase https://github.com/your/repo.git
+
+# For a web page
+llm-components web-to-markdown https://advanced-stack.com
 ```
 
 This will output the directory structure and file contents in a structured markdown format.
@@ -50,6 +61,7 @@ import tempfile
 from pathlib import Path
 from llm_components.loaders.code_base import map_codebase_to_text
 from llm_components.loaders.git_utils import clone_repository
+from llm_components.loaders.web_to_markdown import retrieve_and_convert
 
 # For a local directory
 root_dir = Path("/path/to/your/code/base")
@@ -63,7 +75,13 @@ with tempfile.TemporaryDirectory() as temp_dir:
     clone_repository(repo_url, clone_dir)
     result = map_codebase_to_text(clone_dir)
     print(result)
+
+# For a web page
+url = "https://example.com"
+markdown_content = retrieve_and_convert(url)
+print(markdown_content)
 ```
+
 
 ## License
 
